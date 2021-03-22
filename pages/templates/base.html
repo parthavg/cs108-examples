@@ -1,0 +1,16 @@
+ <!-- pages/base.html -->
+<html>
+    <head>
+        <tittle>Our webpages</tittle>
+    </head>
+    <body>
+
+    <header>
+        <a href="{% url 'home' %}"Home</a>a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'schedule' %}">Schedule</a>
+    </header>
+    {% block content %}
+    {% endblock %}
+    </body>
+</html> 

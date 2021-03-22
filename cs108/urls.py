@@ -19,5 +19,7 @@ from django.urls import path, include
 # project-level URL patterns
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('hello_world.urls')) ## new! link in URLS from our app
+    path('hw/', include('hello_world.urls')),
+    path('pages/', include('pages.urls')),
+    path('quotes/', include('quotes.urls'))## new! link in URLS from our app
 ]
