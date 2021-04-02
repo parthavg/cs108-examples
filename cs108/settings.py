@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'hello_world.apps.HelloWorldConfig', 
     'pages.apps.PagesConfig', 
     'quotes.apps.QuotesConfig',
-    'minifacebook.apps.MinifacebookConfig',#new application!
+    'minifb.apps.MinifbConfig',#new application!
 ]
 
 MIDDLEWARE = [
@@ -61,6 +61,7 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            'string_if_invalid': "NameError: the the template context variable [%s] is not defined.",
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

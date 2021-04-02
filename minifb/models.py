@@ -44,4 +44,3 @@ class Image(models.Model):
     def __str__(self):
         '''Return the image URL of this Image'''
         return self.image_url
-
