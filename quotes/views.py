@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Quote, Person
+from.forms import CreateQuoteForm
 import random
 
 
@@ -36,4 +37,11 @@ class PersonPageView(DetailView):
     model = Person #retrieve quote objects from the database
     template_name = "quotes/person.html" # delegate the display to this template
     context_object_name = "person" # use this variable name in the template
+
+class CreateQuoteView(CreateView):
+    '''Create a new Quote object and store in database.'''
+
+    model = Quote #which model to create
+    form_class = CreateQuoteForm
+    template_name = "quotes/create_quote_form.html"
 

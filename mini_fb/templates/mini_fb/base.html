@@ -1,0 +1,17 @@
+<!-- mini_fb/base.html -->
+<html>
+    <head>
+        <body>
+            <header>
+                <a href="{% url 'random' %}">Random Profile</a>
+                <a href="{% url 'show_all_profiles' %}">Show All Profiles</a>
+                <a href="{% url 'create_profile' %}">Create New Profile</a>
+
+            </header>
+            <hr>
+
+            {% block content %}
+            {% endblock %}
+        </body>
+    </head>
+</html>

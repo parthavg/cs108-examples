@@ -1,0 +1,36 @@
+<!-- mini_fb/show_profile_page.html -->  
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<center>
+<h1>Profile Page</h1>
+
+<img src='{{Profile.get_random_image}}' style='width:200'>
+
+<!-- display the context data -->
+<ul>
+    {% for Profile in show_profile_page %}
+    <li> {{Profile.first_name}} - {{Profile.second_name}} - {{Profile.city}} </li>
+    {% endfor %}
+</ul>
+
+<!--  add the display of status messages. Use a loop to display all status messages.-->
+<ul>
+  {% for StatusMessage in show_profile_page}
+  <li>{{StatusMessage.message}}
+      <a href="{% url 'delete_status' profile_pk=profile.pk status_pk=st_msg.pk %}">delete</a>
+  </li>
+  {% if status.image %} <!--Assignment 19, Task 2-->
+<img src='{{status.image.url}}' style='max-width: 600;'>
+{% endif %}
+    {% endfor %}
+  
+</ul>
+
+<!-- create a loop to display the profiles -->
+
+</center>
+
+{% endblock %}

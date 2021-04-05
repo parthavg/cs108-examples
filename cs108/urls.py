@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 # project-level URL patterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hw/', include('hello_world.urls')),
     path('pages/', include('pages.urls')),
-    path('quotes/', include('quotes.urls'))## new! link in URLS from our app
+    path('quotes/', include('quotes.urls')),## new! link in URLS from our app
+    path('mini_fb/', include('mini_fb.urls'))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
