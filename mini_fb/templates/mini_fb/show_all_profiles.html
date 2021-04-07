@@ -1,5 +1,4 @@
 <!-- mini_fb/show_all_profiles.html -->  
-
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
@@ -10,23 +9,25 @@
 
 
 <!-- create a loop to display the quotes -->
+  
 
-<body>
   <table>
   <tr>
     <th>Name</th>
     <th>Hometown</th>
     <th>Image</th>
-  </tr>{% for Profile in show_all_profiles %}
+    {% for profile in profiles %}
+  </tr>
   <tr>
-  <td>{{Profile.first_name}} - {{Profile.second_name}}</td>
-  <td>{{Profile.city}} </td>
-  <td> <a href="show_profile_page.html"> {{{Profile.profile_image_url}} </a>
+  <td>{{profile.first_name}} - {{profile.last_name}}</td>
+  <td>{{profile.city}} </td>
+  <td> <img src="{{profile.profile_image_url}}" style="max-width: 100;"
   </td>
   </tr>
+  </table>
   {% endfor %}
 
-  </table>
-  </body>
-
   {% endblock %}
+
+
+

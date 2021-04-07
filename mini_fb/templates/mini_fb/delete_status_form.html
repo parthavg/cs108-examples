@@ -14,5 +14,5 @@
 </form>
 <form method='GET' action="{% url 'StatusMessage' StatusMessage.pk %}">
     {% csrf_token %}
-    <input type='submit' name="no" value="no">
+    <input type='submit' name="no" value="no"><a href="{% url 'show_profile_page' %}">Show Profile Page</a>
 </form>

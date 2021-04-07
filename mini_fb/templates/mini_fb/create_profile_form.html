@@ -1,26 +1,26 @@
 <!-- templates/mini_fb/create_profile_form.html -->
 
-{% extends 'quotes/base.html' %}
 
-{% block content %}
+
+
 
 <h1>Create a new profile </h1>
 
-<form method="POST"> <!--HTTP post to send the data to the server-->
-    {% csrf_token %}
+<form method="POST"> <!--POST to send the data up to the server-->
+        {% csrf_token %}
 
-    <!-- display the context variable -->
-    <!--{{form}} <!-- display the form without formatting -->
-
-    <!---{{form.as_p}} <!--paragraph style formatting -->
-    <table>
-    {{form.as_table}} <!-- table style formatting-->
-    <tr>
-        <td></td>
-        <td></td><input type="sumbit" value="Add a profile!">
-    </tr>
-    </table>
-
+        <!--{{form}}--->
+        
+        <!--{{form.as_p}}---> <!--Paragraph style formatting-->
+        <table> 
+        {{form.as_table}}
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Add a profile!!"></td>
+        </tr>
+        </table>
 </form>
 
-{% endblock %}
+
+
+

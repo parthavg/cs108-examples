@@ -41,7 +41,6 @@ class PersonPageView(DetailView):
 class CreateQuoteView(CreateView):
     '''Create a new Quote object and store in database.'''
 
-    model = Quote #which model to create
     form_class = CreateQuoteForm
     template_name = "quotes/create_quote_form.html"
 

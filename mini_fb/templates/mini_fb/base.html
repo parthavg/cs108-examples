@@ -1,17 +1,21 @@
 <!-- mini_fb/base.html -->
+
+
+<!-- Include the link to the main page-->
 <html>
     <head>
-        <body>
-            <header>
-                <a href="{% url 'random' %}">Random Profile</a>
-                <a href="{% url 'show_all_profiles' %}">Show All Profiles</a>
-                <a href="{% url 'create_profile' %}">Create New Profile</a>
-
-            </header>
-            <hr>
-
-            {% block content %}
-            {% endblock %}
-        </body>
+        <title>Mini Facebook Application </title><!-- Overall main heading on each page-->
     </head>
+         <body>
+         <header>
+                    <a href="{% url 'show_all_profiles' %}">Show All Profiles</a>
+                    <a href="{% url 'create_profile' %}">Create New Profile</a>
+        </header>
+        <hr>  
+
+        {% block content %}
+        {% endblock %}    
+        This page is designed by Parthav Gupta in 2021
+
+         </body>   
 </html>
