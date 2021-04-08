@@ -116,7 +116,7 @@ class DeleteStatusMessageView(DeleteView):
         #obtain default context data dictionary by calling get_context_data
         context = super(DeleteStatusMessageView, self).get_context_data(**kwargs)
         #find status message object we are trying to delete 
-        st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+        st_msg = StatusMessage.objects.get(pk=self.kwargs['status_message_pk'])
         #Add this to the context data dictionary 
         context['St_Mg'] = st_msg
         return context
@@ -125,20 +125,19 @@ class DeleteStatusMessageView(DeleteView):
 
         # read the URL data values into variables
         profile_pk = self.kwargs['profile_pk']
-        status_pk = self.kwargs['status_pk']
+        status_pk = self.kwargs['status_message_pk']
 
         # find the StatusMessage object, and return it
 
-        return StatusMessage
+        return StatusMessage.objects.get(pk=self.kwargs['status_message_pk'])
 
     def get_success_url(self):
 
         # read the URL data values into variables
         profile_pk = self.kwargs['profile_pk']
-        status_pk = self.kwargs['status_pk']
 
         url = reverse('show_profile_page', kwargs={'pk': profile_pk})
-        return redirect(url)
+        return (url)
 
 
 class ShowNewsFeedView(DetailView):

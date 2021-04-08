@@ -6,19 +6,20 @@
   <center>
   <!-- display the context data -->
 
-  <h1>Mini Facebook</h1>
+  <h1 style="font-size:150%;">Mini Facebook</h1>
 
 
-  <h3>{{profile.first_name}} {{profile.last_name}}'s Page</h3>
+  <h3 style="font-size:150%;">{{profile.first_name}} {{profile.last_name}}'s Page</h3>
   <img src= "{{profile.profile_image_url}}" style='width:500'>
-  <h3>from: {{profile.city}}</h3>
-  <h3>email: {{profile.email_address}}</h3>
-  <a href="{% url 'update_profile' profile.pk %}">Edit profile</a> 
+  <h3 style="font-size:87%;">from: {{profile.city}}</h3>
+  <h3 style="font-size:87%;">email: {{profile.email_address}}</h3>
+  
+  <h4><a href="{% url 'update_profile' profile.pk %}">Edit profile</a></h4>
   <h4><a href="{% url 'news_feed' profile.pk %}">Display {{profile.first_name}}'s news feed</a></h4>
   <h4><a href="{% url 'show_possible_friends' profile.pk %}"> {{profile.first_name}}'s possible friends</a></h4>
   
 
-  <h2>{{profile.first_name}}'s friends </h2>
+  <h2 style="font-size:300%;">{{profile.first_name}}'s friends </h2>
 
   {% if profile.get_friends %}
 
@@ -44,22 +45,22 @@
   {{profile.first_name}} doesn't have any friends.
   {% endif %}
 
-  <h5>{% for status_message in profile.get_status_messages %}</h5>   
-  <a href="{% url 'delete_status' profile_pk=profile.pk status_message_pk=status_message.pk %}">delete</a>
+    {% for status_message in profile.get_status_messages %}  
+  <h5 style="font-size:175%;"><a href="{% url 'delete_status' profile_pk=profile.pk status_message_pk=status_message.pk %}">delete</a></h5>
     {% if status_message.image %}
           <img src='{{status_message.image.url}}' style='max-width: 600;'>
           '{{status_message.message}}'
           '{{status_message.time_stamp}}'
     
-              {% endif %}
+    {% endif %}
 
   
          
-  {% endfor %}
+    {% endfor %}
 
 </center>
 
-<h6>New status message</h6>
+<h6 style="font-size:202%;"> New status message</h6>
 
 <form action="{% url 'post_status' profile.pk %}" method="POST">
         {% csrf_token %}
