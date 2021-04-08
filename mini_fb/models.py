@@ -12,11 +12,11 @@ class Profile(models.Model):
     city = models.CharField(max_length=40)
     email_address = models.CharField(max_length=45)
     profile_image_url = models.URLField(blank=True)
-    
+    friends = models.ManyToManyField("self")
+
 
     def __str__(self):
         return f'"{self.first_name}" - "{self.last_name}" - "{self.city}" - "{self.email_address}" -"{self.profile_image_url}"'
-
 
 
     def get_status_messages(self):
@@ -30,6 +30,23 @@ class Profile(models.Model):
 
         #'profile/<int:pk>'
         return reverse('show_profile_page',kwargs={'pk':self.pk})
+    
+    def get_friends(self):
+        '''Return all friends for this profile'''
+        return self.friends.all()
+
+    def get_news_feed(self):
+        '''obtain and return the news feed items'''
+
+        buddies = self.friends.all()
+        news = StatusMessage.objects.filter(profile__in=buddies).order_by("-time_stamp")
+        return news
+
+    def get_friend_suggestions(self):
+        '''shows a QuerySet of all Profile that could be added as friends'''
+
+        possible_friends = Profile.objects.exclude(pk__in=self.get_friends())
+        return possible_friends 
 
 class StatusMessage(models.Model):
     '''Model Data attributes of Facebook Status Message'''

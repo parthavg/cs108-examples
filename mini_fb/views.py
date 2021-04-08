@@ -104,16 +104,13 @@ def post_status_message(request, pk):
     url = reverse('show_profile_page', kwargs={'pk': pk})
     return redirect(url)
     
-    
-    
-    
 
 
 class DeleteStatusMessageView(DeleteView):
     '''Update a profile object and store it in the database'''
-    model = Profile
+    
     template_name = "mini_fb/delete_status_form.html"
-    succsess_url = "../../all"
+    queryset = StatusMessage.objects.all()
 
     def get_context_data(self, **kwargs):
         #obtain default context data dictionary by calling get_context_data
@@ -121,12 +118,55 @@ class DeleteStatusMessageView(DeleteView):
         #find status message object we are trying to delete 
         st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
         #Add this to the context data dictionary 
+        context['St_Mg'] = st_msg
         return context
 
+    def get_object(self):
+
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        status_pk = self.kwargs['status_pk']
+
+        # find the StatusMessage object, and return it
+
+        return StatusMessage
+
+    def get_success_url(self):
+
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        status_pk = self.kwargs['status_pk']
+
+        url = reverse('show_profile_page', kwargs={'pk': profile_pk})
+        return redirect(url)
 
 
+class ShowNewsFeedView(DetailView):
+    "Display news feed"
+    model = Profile
+    template_name = "mini_fb/show_news_feed.html"
+    context_object_name = "profile"
 
 
+class ShowPossibleFriendsView(DetailView):
+    "Show Possible friends for profile"
+
+    model = Profile
+    template_name = "mini_fb/show_possible_friends.html"
+    context_object_name = "profile"
+
+def add_friend(request, profile_pk, friend_pk):
+        '''process the add_friend request, to add a friend for a given profile'''
+    
+        #find the Profile object which is adding the friend, and store it into a variable
+        profile_ob_pk = Profile.objects.get(pk= profile_pk)
+        #find the Profile object of the friend to add, and store it into another variable
+        friend_ob_pk = Profile.objects.get(pk= friend_pk)
+        #add that friend’s Profile into the profile.friends object (using the method add).
+        profile_ob_pk.friends.add(friend_ob_pk)
+        #save the profile object
+        profile_ob_pk.save()
+        return redirect(reverse('show_profile_page', kwargs={'pk':profile_pk}))
 
 
 

@@ -1,0 +1,38 @@
+<!-- mini_fb/show_possible_friends.html -->  
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+    <td><a href="{% url 'show_profile_page' profile.pk %}">Back to {{profile.first_name}}'s profile page</a></td>
+
+
+    <h1>Friend Suggestion for {{profile.first_name}}</h1>
+
+    <table>
+        {% for friend in profile.get_friend_suggestions %}
+            <colgroup>
+
+                <col span="1" style="width: 40%">
+                <col span="1" style="width: 40%">
+                <col span="1" style="width: 40%">
+        
+            </colgroup>
+
+            <tr>
+                <td><h3><a href='{% url "show_profile_page" friend.pk %}}'>{{friend.first_name}} {{friend.last_name}}</a></h3></td>
+                <td><img src='{{friend.profile_image_url}}' width = "50" height = "50"></td>
+                <td>
+                    <form method='POST' action="{% url 'add_friend' profile_pk=profile.pk friend_pk=friend.pk %}">
+                        {% csrf_token %}
+                        <input type='submit' name="Add friends" value="Add friends">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+        
+
+
+{% endblock %}
+
+

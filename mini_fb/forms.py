@@ -8,6 +8,7 @@ class CreateProfileForm(forms.ModelForm):
     last_name = forms.CharField(label='last name', required=True)
     city = forms.CharField(label='last name', required=True)
     email_address = forms.CharField(label='last name', required=True)
+    profile_image_url = forms.URLField(label='profile_image_url', required=True)
     class Meta:
         '''additional data about this form'''
         model = Profile
@@ -18,6 +19,7 @@ class UpdateProfileForm(forms.ModelForm):
     '''Updates profile forms'''
     city = forms.CharField(label='last name', required=True)
     email_address = forms.CharField(label='last name', required=True)
+    profile_image_url = forms.URLField(label='profile_image_url', required=True)
     class Meta: 
         '''additional data about this form'''
         model = Profile
@@ -26,7 +28,9 @@ class UpdateProfileForm(forms.ModelForm):
 
 class CreateStatusMessageForm(forms.ModelForm):
     '''A form to create new status message forms'''
-    image = forms.ImageField(label='image' ,required=False)
+    time_stamp = forms.TimeField(label='time_stamp', required=True)
+    image = forms.ImageField(label='image', required=False)
+
     class Meta:
         model = StatusMessage
-        fields = ['message', 'image']
+        fields = ['message', 'image', 'time_stamp']
