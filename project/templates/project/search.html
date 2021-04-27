@@ -1,0 +1,31 @@
+<!-- project/search.html -->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+
+<h1>Search the Posters</h1>
+
+<form>
+    <input type="text" name="search_text"?>
+    <input type="submit" value="search">
+</form>
+
+
+    <h1>Search Results</h1>
+
+<!-- create a loop to display the posters-->
+    <table>
+        {% for poster in posters %}   
+            <tr>
+                <td>{{poster.tittle}} </td>
+                <td>{{poster.price}}</td>
+                <td><a href="{% url 'show_poster_page' poster.pk %}"><img src="{{poster.poster_image_url}}" style="max-width: 250;"></a>
+                </td>
+            </tr>
+    </table>
+
+        {% endfor %}
+
+ {% endblock %}

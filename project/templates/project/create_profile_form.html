@@ -1,0 +1,18 @@
+<!-- project/create_profile_form.html -->
+
+<h1>Add a new Profile </h1>
+
+<form method="POST"> <!--POST to send the data up to the server-->
+    {% csrf_token %}
+
+    <!--{{form}}--->
+    
+    <!--{{form.as_p}}---> <!--Paragraph style formatting-->
+    <table> 
+    {{form.as_table}}
+    <tr>
+        <td></td>
+        <td><input type="submit" value="  Add Profile  "></td>
+    </tr>
+    </table>
+</form>

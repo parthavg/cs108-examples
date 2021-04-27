@@ -1,0 +1,44 @@
+<!-- project/show_profile.html -->
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1 style="font-size:350%;">POP & CORN</h1>
+
+<center>
+<h3 style="font-size:150%;">{{profile.name}}'s' Page</h3>
+  <h3 style="font-size:87%;">  <img src= "{{profile.profile_image_url}}" style='width:500'></h3>
+  <h3 style="font-size:120%;">{{profile.email_id}}</h3>
+
+  {% if profile.get_friends %}
+
+  {% for profile in profile.get_friends %}
+  <h4> {{profile.name}}'s' Friends </h4> 
+    <table>
+
+        <colgroup>
+
+            <col span="1" style='width:50%;'>
+            <col span="1" style='width:50%;'>
+        
+        </colgroup>
+
+        <tr>
+
+          <td><a href="{% url 'show_profile' profile.pk %}"></a>{{profile.name}}</td>
+          <td><img src="{{profile.profile_image_url}}" width="50" height="60"></td>
+        </tr>
+    </table>
+  {% endfor %}
+
+  {% else %}
+  {{profile.name}} doesn't have any friends.
+  {% endif %}
+</center>
+
+
+<!--Add a link to the reviews -->
+
+
+{% endblock %}
+

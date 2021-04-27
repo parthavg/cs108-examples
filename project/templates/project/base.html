@@ -1,0 +1,22 @@
+<!-- project/base.html -->
+
+
+<!-- Include the link to the main page-->
+<html>
+    <head>
+        <title>POP & CORN</title><!-- Overall main heading on each page-->
+    </head>
+         <body>
+         <header>
+                    <a href="{% url 'show_all_posters' %}">Home</a>
+                    <a href="{% url 'create_list' %}"> New Poster Listing</a>
+                    <a href="{% url 'create_profile' %}"> New Profile</a>
+        </header>
+        <hr>  
+
+        {% block content %}
+        {% endblock %}    
+        Copyright ©April 2021 designed by Parthav Gupta in 2021
+
+         </body>   
+</html>

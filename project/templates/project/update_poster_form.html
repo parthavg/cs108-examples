@@ -1,0 +1,16 @@
+<!-- templates/project/update_poster_form.html -->
+
+<h1>Update Poster </h1>
+
+<form method="POST"> <!--HTTP post to send the data to the server-->
+    {% csrf_token %}
+
+    <table>
+    {{form.as_table}} <!-- table style formatting-->
+    <tr>
+        <td></td>
+        <td><input type="submit" value="Update"></td>
+    </tr>
+    </table>
+
+</form>

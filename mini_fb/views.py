@@ -107,7 +107,7 @@ def post_status_message(request, pk):
 
 
 class DeleteStatusMessageView(DeleteView):
-    '''Update a profile object and store it in the database'''
+    '''Delete a status message object and store it in the database'''
     
     template_name = "mini_fb/delete_status_form.html"
     queryset = StatusMessage.objects.all()
