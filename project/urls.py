@@ -1,3 +1,9 @@
+# file name: project/urls.py
+# author: Parthav Gupta
+# email: parthavg@bu.edu
+# description: Allows us to create to the essential link between URL's and Views. The most important 
+# being the URL patterns tuple. 
+
 from django.urls import path
 from .views import *
 
@@ -12,5 +18,7 @@ urlpatterns = [
     path('poster/<int:pk>/post_review',post_review_message, name="post_review"),# allows user to post review
     path('poster/<int:poster_pk>/delete_review/<int:review_pk>', DeleteReviewView.as_view(), name="delete_review"), #delete review uploaded by the respective profile
     path('search/', SearchView.as_view(), name="search"),#search through all posters
+    path('profile/<int:pk>/show_possible_friends', ShowPossibleFriendsView.as_view(), name="show_possible_friends"), #suggest possible friends to add 
+    path('profile/<int:profile_pk>/add_friend/<int:friend_pk>',add_friend, name="add_friend") #add friends with people who have similar interest in genre 
 ]
 

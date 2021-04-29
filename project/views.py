@@ -1,10 +1,17 @@
+# file name: project/views.py
+# author: Parthav Gupta
+# email: parthavg@bu.edu
+# description: A python page that imports models from models.py and takes web requests to return 
+# a web response. 
+
+
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import *
 from .forms import CreateListingForm, UpdatePosterForm, CreateReviewForm, CreateProfileForm
 from django.shortcuts import redirect
-from django.urls import reverse
+from django.urls import reverse 
 from django.http import HttpResponse
 
 
@@ -87,7 +94,6 @@ def post_review_message(request, pk):
     # if and only if we are processing a POST request, try to read the data
     if request.method == 'POST':
 
-        # print(request.POST) # for debugging at the console
 
         # create the form object from the request's POST data
         form = CreateReviewForm(request.POST or None)
@@ -100,7 +106,7 @@ def post_review_message(request, pk):
             # find the poster that matches the `pk` in the URL
             poster = Poster.objects.get(pk=pk)
 
-            # attach FK profile to this status message
+            # attach FK poster to this review
             review.poster = poster
 
             # now commit to database
@@ -109,7 +115,7 @@ def post_review_message(request, pk):
             print("Error: the form was not valid")
             print(form.errors)
 
-    # redirect the user to the show_profile_page view
+    # redirect the user to the individual poster page view
     url = reverse('show_poster_page', kwargs={'pk': pk})
     return redirect(url)
 
@@ -165,3 +171,23 @@ def get_queryset(self):
 
     # default: no query was provided:
     return None
+
+class ShowPossibleFriendsView(DetailView):
+    "Show Possible friends for profile"
+
+    model = Profile
+    template_name = "project/show_possible_friends.html"
+    context_object_name = "profile"
+
+def add_friend(request, profile_pk, friend_pk):
+        '''process the add_friend request, to add a friend for a given profile'''
+    
+        #find the Profile object which is adding the friend, and store it into a variable
+        profile_ob_pk = Profile.objects.get(pk= profile_pk)
+        #find the Profile object of the friend to add, and store it into another variable
+        friend_ob_pk = Profile.objects.get(pk= friend_pk)
+        #add that friend’s Profile into the profile.friends object (using the method add).
+        profile_ob_pk.friends.add(friend_ob_pk)
+        #save the profile object
+        profile_ob_pk.save()
+        return redirect(reverse('show_profile', kwargs={'pk':profile_pk}))

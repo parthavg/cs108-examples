@@ -1,18 +1,24 @@
-<!-- project/create_list_form.html -->
+<!-- 
+File Name: project/templates/create_list_form.html
+author: Parthav Gupta
+email: parthavg@bu.edu
+description: this HTML file provides a user the option to post a new poster 
+listing onto the exiting databse-->
+
 
 <h1>Create a new Poster listing </h1>
 
 <form method="POST"> <!--POST to send the data up to the server-->
-    {% csrf_token %}
+    {% csrf_token %} <!--Essential for cyber security purposes-->
 
     <!--{{form}}--->
     
-    <!--{{form.as_p}}---> <!--Paragraph style formatting-->
+    <!--Table style formatting-->
     <table> 
     {{form.as_table}}
     <tr>
         <td></td>
-        <td><input type="submit" value="Add Poster Listing !!"></td>
+        <td><input type="submit" value="Add Poster Listing !!"></td> <!--Gives the user the option to submit listing to admin database-->
     </tr>
     </table>
 </form>

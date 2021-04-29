@@ -1,0 +1,44 @@
+<!-- 
+File Name: project/templates/show_possible_friends.html
+author: Parthav Gupta
+email: parthavg@bu.edu
+description: this HTML file displays the possible profiles to the user who he may/may not add as a friend -->
+
+<!-- project/show_possible_friends.html -->  
+{% extends 'project/base.html' %}
+
+{% block content %}
+    <td><a href="{% url 'show_profile' profile.pk %}">Back to {{profile.name}}'s profile page</a></td>
+
+
+    <h1>Friend Suggestion for {{profile.name}}</h1>
+
+    <table> <!--create a loop to display friend suggestions to using profile-->
+        {% for friend in profile.get_friend_suggestions %}
+            <colgroup>
+
+                <col span="1" style="width: 40%">
+                <col span="1" style="width: 40%">
+                <col span="1" style="width: 40%">
+        
+            </colgroup>
+
+            <tr>
+                <td><h3><a href='{% url "show_profile" friend.pk %}'>{{friend.name}}</a></h3></td> <!--show profile name of possible "friend"-->
+                <td><img src='{{friend.profile_image_url}}' width = "50" height = "50"></td>
+                <td>
+                    <form method='POST' action="{% url 'add_friend' profile_pk=profile.pk friend_pk=friend.pk %}">
+                        {% csrf_token %} <!--added to mantain strong cyber security-->
+                        <input type='submit' name="Add friends" value="Add friends"> <!--final prompt displayed before adding friends to profile-->
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+        
+
+
+{% endblock %}
+
+

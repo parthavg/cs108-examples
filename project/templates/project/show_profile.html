@@ -1,44 +1,47 @@
-<!-- project/show_profile.html -->
+<!-- 
+File Name: project/templates/show_profile.html
+author: Parthav Gupta
+email: parthavg@bu.edu
+description: this HTML file displays the individual profile writing reviews in organized fashion to the user -->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
 
-<h1 style="font-size:350%;">POP & CORN</h1>
 
 <center>
-<h3 style="font-size:150%;">{{profile.name}}'s' Page</h3>
+<h3 style="font-size:190%; font-weight: bold; text-decoration: underline;">{{profile.name}}</h3>
+<h3 style="font-size:150%; font-family: 'Antonio', sans-serif; margin-top: 20px;"> "{{profile.fav_genre}} is my favorite genre"</h3>
+<h3 style="font-size:110%; margin-top: 26px;">{{profile.email_id}}</h3>
   <h3 style="font-size:87%;">  <img src= "{{profile.profile_image_url}}" style='width:500'></h3>
-  <h3 style="font-size:120%;">{{profile.email_id}}</h3>
+  <h4><a href="{% url 'show_possible_friends' profile.pk %}"> {{profile.name}}'s possible friends</a></h4>
+  
 
-  {% if profile.get_friends %}
+<h2 style="font-size:160%;">{{profile.name}}'s friends </h2>
 
-  {% for profile in profile.get_friends %}
-  <h4> {{profile.name}}'s' Friends </h4> 
-    <table>
+{% if profile.get_friends %} <!-- if statement to show friends of the profile if he has friends-->
 
-        <colgroup>
+{% for profile in profile.get_friends %} <!--create a loop to display all friends for the individual profile-->
+  <table>
 
-            <col span="1" style='width:50%;'>
-            <col span="1" style='width:50%;'>
-        
-        </colgroup>
+      <colgroup>
 
-        <tr>
+          <col span="1" style='width:50%;'>
+          <col span="1" style='width:50%;'>
+      
+      </colgroup>
 
-          <td><a href="{% url 'show_profile' profile.pk %}"></a>{{profile.name}}</td>
-          <td><img src="{{profile.profile_image_url}}" width="50" height="60"></td>
-        </tr>
-    </table>
-  {% endfor %}
+      <tr>
 
-  {% else %}
-  {{profile.name}} doesn't have any friends.
-  {% endif %}
-</center>
+        <td><a href="{% url 'show_profile' profile.pk %}"></a>{{profile.name}}</td>
+        <td><img src="{{profile.profile_image_url}}" width="50" height="60"></td>
+      </tr>
+  </table>
+{% endfor %}
 
-
-<!--Add a link to the reviews -->
-
+{% else %} <!--else statement for statement if the user has no friends -->
+{{profile.name}} doesn't have any friends.
+{% endif %}
 
 {% endblock %}
 

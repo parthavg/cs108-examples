@@ -1,35 +1,55 @@
-<!-- project/show_all_posters.html -->
+<!-- 
+File Name: project/templates/show_all_posters.html
+author: Parthav Gupta
+email: parthavg@bu.edu
+description: this HTML file displays all the poster items in an organized fashion to the user -->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
-    <body style="background-color:rgb(244, 244, 138);"></body>
-    <h1 style="font-size:350%;">POP & CORN</h1>
 
-    <!-- display the context data -->
+<body style="background-color:rgb(244, 244, 138); font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;"></body>
 
-    <!-- create a loop to display the posters -->
-    <h4>Categories; </h4>
-    {% for category in categories %}
-      <a href="../{{category.0}}">{{ category.1 }} </a>
-    {% endfor %}
+<!-- display the context data -->
+
+<!-- create a loop to display the 3 poster categories a poster may be slotted into  -->
+<div class="category" style="margin-top: 20px;">
+    <div class="category-tab">
+        {% for category in categories %}
+        <a href="../{{category.0}}" style="padding:5px; border-radius:10px; font-family: Georgia, 'Times New Roman', Times, serif;">{{ category.1 }} </a>
+        {% endfor %}
+    </div>
+</div>
     
-    <table>
+    <!-- <table> Created earlier for alloacting information of posters but then Not utilized
 
         <tr>
             <th>Name</th>
             <th>Price</th>
             <th>Image</th>
-        </tr>
-
-        {% for poster in posters %}   
-            <tr>
-                <td>{{poster.tittle}} </td>
-                <td>{{poster.price}}</td>
-                <td><a href="{% url 'show_poster_page' poster.pk %}"><img src="{{poster.poster_image_url}}" style="max-width: 250;"></a>
-                </td>
-            </tr>
-    </table>
-
-      {% endfor %}
-
- {% endblock %}
+        </tr> -->
+        <div class="row px-4">
+        <!--for loop display showing a poster on the all posters listed page-->
+            {% for poster in posters %}
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-3 p-2  mt-2">
+                <div class="d-flex justify-content-center flex-column border border-bottom-secondary w-100 text-center">
+                    <div class="font-weight-bold" style="font-size: larger; font-family: Georgia, 'Times New Roman', Times, serif;">{{poster.tittle}} </div>
+                    
+                    <div class="mx-auto"><a href="{% url 'show_poster_page' poster.pk %}"><img src="{{poster.poster_image_url}}"
+                                style="max-height: 250;"></a></div>
+        
+                    <div class="font-weight-bold">
+                        <span class="text-danger" >${{poster.discounted_price}}</span>
+                        <span style="text-decoration:line-through;">${{poster.actual_price}}</span> 
+                    </div>
+                        
+                
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- </table> -->
+        
+        
+        
+        {% endblock %}

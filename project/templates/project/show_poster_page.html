@@ -1,41 +1,63 @@
-<!-- project/show_poster_page.html -->
+<!-- 
+File Name: project/templates/show_poster_page.html
+author: Parthav Gupta
+email: parthavg@bu.edu
+description: this HTML file displays the individual poster item in organized fashion to the user -->
+
 {% extends 'project/base.html' %}
 
 {% block content %}
 <body style="background-color:rgb(232, 147, 132);"></body>
 
-<h1 style="font-size:350%;">POP & CORN</h1>
-
-<center>
-<h3 style="font-size:230%;">{{posters.tittle}} Poster</h3>
-<h3 style="font-size:200%;">Category: {{posters.category}}</h3>
-  <h3 style="font-size:87%;">  <img src= "{{posters.poster_image_url}}" style='width:450'></h3>
-  <h4><a href="{% url 'update_poster' posters.pk %}">Update Poster</a></h4>
-  <h3 style="font-size:280%;">@ ${{posters.price}}</h3>
-  <h3 style="font-size:160%;"> {{posters.description}}</h3>
-</center>
-<h5 style="font-size:202%;"> User Reviews</h5>
 
 
-<form action="{% url 'post_review' posters.pk %}" method="POST">
+  <h3 style="font-size:230%; text-align: center;" class="font-weight-bold h3">{{posters.tittle}}</h3>
+  <h3 style="font-size:200%; text-align: center; text-decoration: underline; font-style: italic; margin: 20px;"><span class="font-weight-bold h3"> Category: {{posters.category}}</h3>
+    <div class="row">
+    <h3 style="font-size:87%; float:left">  <img src= "{{posters.poster_image_url}}" style='width:450'></h3>
+      <div class="col-lg-6">
+    
+  
+    <!-- <h3 style="font-size:280%;">@ ${{posters.actual_price}}</h3>
+    <h3 style="font-size:280%;">Discounted Price ${{posters.discounted_price}}</h3>   -->
+    <h3 style="font-size:180%; float:left; display:inline-flex; margin-bottom: 42px; margin-top: 40px; font-family: 'Antonio', sans-serif;"> "{{posters.description}}"</h3>
+    <div class="font-weight-bold h2" style="margin-bottom: 50px;" >
+      <span class="text-danger" >${{posters.discounted_price}}</span>
+      <span style="text-decoration:line-through;">${{posters.actual_price}}</span> 
+  </div>
+  <h4><a href="{% url 'update_poster' posters.pk %}" style="margin-right: 20px; text-decoration: underline;">Update Poster</a></h4>
+</div>
+</div>
+  <div style = "text-align: center;">
+
+<h5 style="font-size:202%; display:block; text-decoration: underline; font-weight: bold;"> User Reviews</h5>
+
+
+<form action="{% url 'post_review' posters.pk %}" method="POST" style = "text-align: center;"> <!--uses the post review message def to display a form to add new review messages by profiles-->
         {% csrf_token %}
         
         <!--{{form}}--->
-        
+        <div style = "text-align: center;">
         <!--{{form.as_p}}---> <!--Paragraph style formatting-->
+        <center>
         <table> 
         {{create_review_form.as_table}}
         <tr>
             <td><input type="submit" value="Upload Review"></td>
         </tr>
         </table>
+      </center>
+      </div>
 </form>
+</div>
 
-  {% for review in posters.get_review %}
-        <h6 style="font-size:140%;"> "{{review.message}}"</h6>
-        <a href="{% url 'show_profile' review.profile.pk %}"><h7 style="font-size:110%;"> {{review.profile}}</h7> </a>
-        <h6 style="font-size:105%;"><a href="{% url 'delete_review' poster_pk=posters.pk review_pk=review.pk %}">delete</a></h6>
+  {% for review in posters.get_review %} <!--create a loop to display reviews posted by specific profiles under each individual poster page-->
+        <h6 style="font-size:150%; text-align: center; padding: 20px; font-style: italic;"> "{{review.message}}" </h6>
+        <h6 style="font-size:105%; text-align: left;"><a href="{% url 'delete_review' poster_pk=posters.pk review_pk=review.pk %}">Delete</a></h6> <!--allows to delete uploaded by specifc user-->
+        <a href="{% url 'show_profile' review.profile.pk %} " style="text-align: center;">
+        <h7 style="font-size:130%; text-align: center; float: right; margin-top: -40px; margin-right: 40%;"> - {{review.profile}}</h7> </a>
 
   {% endfor %}
 
 {% endblock %}
+
